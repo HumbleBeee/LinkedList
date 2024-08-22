@@ -172,9 +172,19 @@ public class doublyLinkedList<T> implements Iterable<T> {
         if(position < 0 || position >= size){
             throw new IllegalArgumentException();
         }
-        int i;
-        Node<T> temp = head;
-
+        Node<T> fast, slow;
+        fast = slow = head;
+        while(position-- > 0){
+            fast = fast.next;
+        }
+        while(fast.next != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        T data = slow.next.data;
+        slow.next.next.prev = slow.next;
+        slow.next = slow.next.next;
+        return data;
     }
 
     @Override

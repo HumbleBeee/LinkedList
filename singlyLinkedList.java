@@ -129,6 +129,34 @@ public class singlyLinkedList<T> implements Iterable<T>{
         return curr;
     }
 
+    public T deleteAtFromEnd(int pos){
+        if(isEmpty()){
+            throw new RuntimeException("Empty List");
+        }
+        if(pos < 0 || pos > size){
+            throw new RuntimeException("ILLEGAL ADDRESS");
+        }
+        if(pos == 0){
+            return deleteAtEnd();
+        }
+        if(pos == size - 1){
+            return deleteAtFront();
+        }
+
+        Node<T> fast, slow;
+        fast = slow = head;
+        while(pos-- > 0 ){
+            fast = fast.next;
+        }
+        while(fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        T data = slow.next.data;
+        slow.next = slow.next.next;
+        return data;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
