@@ -136,10 +136,10 @@ public class singlyLinkedList<T> implements Iterable<T>{
         if(pos < 0 || pos > size){
             throw new RuntimeException("ILLEGAL ADDRESS");
         }
-        if(pos == 0){
+        if(pos == 0 || pos == 1){
             return deleteAtEnd();
         }
-        if(pos == size - 1){
+        if(pos == size - 1 || pos == size){
             return deleteAtFront();
         }
 
@@ -154,7 +154,22 @@ public class singlyLinkedList<T> implements Iterable<T>{
         }
         T data = slow.next.data;
         slow.next = slow.next.next;
+        --size;
         return data;
+    }
+
+    public void deleteAllOccurence(T element){
+        while(head != null && head.data == element){
+            head = head.next;
+        }
+        Node<T> temp = head;
+        while(temp != null && temp.next != null){
+            if(temp.next.data == element){
+                temp.next = temp.next.next;
+            } else{
+                temp = temp.next;
+            }
+        }
     }
 
     @Override
