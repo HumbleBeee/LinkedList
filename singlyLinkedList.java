@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Stack;
 
 public class singlyLinkedList<T> implements Iterable<T>{
 
@@ -127,6 +128,18 @@ public class singlyLinkedList<T> implements Iterable<T>{
         temp.next = temp.next.next;
         --size;
         return curr;
+    }
+
+    public Node<T> reverseList(){
+        Node<T> curr = head;
+        Node<T> newList = null;
+        while(curr != null){
+            Node<T> nexNode = curr.next;
+            curr.next = newList;
+            newList = curr;
+            curr = nexNode;
+        }
+        return head;
     }
 
     public T deleteAtFromEnd(int pos){

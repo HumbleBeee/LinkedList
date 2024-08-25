@@ -191,6 +191,21 @@ public class doublyLinkedList<T> implements Iterable<T> {
         return data;
     }
 
+    public void reverseList(){
+        Node<T> current  = head;
+        Node<T> temp = null;
+        while(current != null){
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+
+        if(temp != null){
+            head = temp.prev;
+        }
+    }
+
     @Override
     public java.util.Iterator<T> iterator() {
         return new java.util.Iterator<T>() {
