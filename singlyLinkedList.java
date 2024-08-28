@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.Stack;
 
 public class singlyLinkedList<T> implements Iterable<T>{
 
@@ -130,6 +129,7 @@ public class singlyLinkedList<T> implements Iterable<T>{
         return curr;
     }
 
+    /* Leetcode problem 206 */
     public Node<T> reverseList(){
         Node<T> curr = head;
         Node<T> newList = null;
@@ -142,6 +142,7 @@ public class singlyLinkedList<T> implements Iterable<T>{
         return head;
     }
 
+    /* Leetcode problem 19 */
     public T deleteAtFromEnd(int pos){
         if(isEmpty()){
             throw new RuntimeException("Empty List");
@@ -171,6 +172,7 @@ public class singlyLinkedList<T> implements Iterable<T>{
         return data;
     }
 
+    /* Leetcode 203 */
     public void deleteAllOccurence(T element){
         while(head != null && head.data == element){
             head = head.next;
@@ -183,6 +185,33 @@ public class singlyLinkedList<T> implements Iterable<T>{
                 temp = temp.next;
             }
         }
+    }
+
+    public singlyLinkedList<Integer> addTwoList(singlyLinkedList<Integer> l1, singlyLinkedList<Integer> l2){
+        singlyLinkedList<Integer> result = new singlyLinkedList<>();
+        Node<Integer> node1 = (Node<Integer>) l1.head;
+        Node<Integer> node2 = (Node<Integer>) l2.head;
+
+        int carry = 0;
+
+        while(node1 != null || node2 != null){
+            int sum = 0;
+            if(node1 != null){
+                sum += node1.data;
+                node1 = node1.next;
+            }
+            if(node2 != null){
+                sum += node2.data;
+                node2 = node2.next;
+            }
+            sum += carry;
+            carry = sum/10;
+            result.addAtEnd(sum%10);
+        }
+        if(carry > 0){
+            result.addAtEnd(carry);
+        }
+        return result;
     }
 
     @Override
